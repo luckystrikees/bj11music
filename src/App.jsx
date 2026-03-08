@@ -117,17 +117,26 @@ export default function DJLanding() {
         {/* gradient overlay */}
         <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF]"></div>
 
-        <div className="relative z-10 max-w-xl mx-auto">
+          <div className="relative flex justify-center mb-10">
 
-          {/* logo + glow */}
-          <div className="relative flex justify-center mb-8">
+            {/* ambient glow */}
+            <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
 
-            <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-cyan-400/20 blur-3xl"></div>
+            {/* soft vignette behind image */}
+            <div className="absolute w-[380px] h-[380px] rounded-2xl bg-gradient-to-b from-transparent via-black/20 to-black/60 blur-xl"></div>
 
             <img
               src={logo}
               alt="B.J11 DJ"
-              className="relative w-64 md:w-80 lg:w-96 drop-shadow-[0_0_35px_rgba(34,211,238,0.45)] transition-transform duration-700 hover:scale-105"
+              className="
+                relative
+                w-72 md:w-96
+                rounded-2xl
+                shadow-[0_30px_80px_rgba(0,0,0,0.8)]
+                drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
+                transition duration-700
+                hover:scale-[1.02]
+              "
             />
 
           </div>
