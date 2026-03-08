@@ -267,37 +267,6 @@ export default function DJLanding() {
 
       </section>
 
-      {/* =========================================================
-         MINI AUDIO PLAYER
-
-
-      {current && (
-
-        <div className="fixed bottom-6 right-6 bg-[#171717]/80 backdrop-blur p-4 rounded-xl w-80 shadow-lg">
-
-          <div className="text-sm mb-2">{current.title}</div>
-
-          <div className="flex items-center justify-between">
-
-            <button
-              onClick={togglePlay}
-              className="px-4 py-2 border border-[#9BE7D8]/40 rounded-full"
-            >
-              {playing ? "Pausa" : "Reproducir"}
-            </button>
-
-            <span className="text-xs text-[#8C8C8C]">
-              {current.platform}
-            </span>
-
-          </div>
-
-          <audio ref={audioRef} src={current.audio} />
-
-        </div>
-
-      )}
-      ========================================================= */}
 
 
      
