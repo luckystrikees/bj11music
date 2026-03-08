@@ -102,12 +102,14 @@ export default function DJLanding() {
 
         <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>  
 
-          <button
-            onClick={() => playSession(sessions[0])}
-            className="px-6 py-3 bg-[#171717] border border-[#9BE7D8]/40 rounded-full hover:shadow-[0_0_20px_rgba(155,231,216,0.4)] transition"
+          <a
+            href="https://soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session?si=c42176721a6541c1a6a331f92cfb11e8&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-6 py-3 bg-[#171717] border border-[#9BE7D8]/40 rounded-full hover:shadow-[0_0_20px_rgba(155,231,216,0.4)] transition"
           >
             Reproducir última sesión
-          </button>
+          </a>
         </div>
       </section>
 
