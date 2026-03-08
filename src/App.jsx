@@ -4,7 +4,7 @@
 **********************************************************************/
 
 import { useState, useRef, useEffect } from "react";
-
+import SoundcloudFeed from "./components/SoundcloudFeed";
 import logo from "./assets/bj11.png";
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
@@ -154,54 +154,19 @@ export default function DJLanding() {
 
       </section>
 
-      {/* =========================================================
-         SESSIONS
-      ========================================================= */}
+{/* =========================================================
+   SESSIONS
+========================================================= */}
 
-      <section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
+<section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
 
-        <h2 className="text-3xl mb-10">
-          Sesiones recientes
-        </h2>
+  <h2 className="text-3xl mb-10">
+    Sesiones recientes
+  </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+  <SoundcloudFeed />
 
-          {sessions.map((s, i) => (
-
-            <div
-              key={i}
-              className="bg-[#171717] rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(155,231,216,0.15)] transition"
-            >
-
-              <img
-                src={s.artwork}
-                className="w-full h-48 object-cover"
-              />
-
-              <div className="p-5">
-
-                <h3 className="mb-2">{s.title}</h3>
-
-                <p className="text-sm text-[#8C8C8C] mb-4">
-                  {s.length} • {s.platform}
-                </p>
-
-                <button
-                  onClick={() => playSession(s)}
-                  className="text-sm px-4 py-2 border border-[#9BE7D8]/40 rounded-full hover:bg-[#9BE7D8]/10"
-                >
-                  Reproducir
-                </button>
-
-              </div>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
+</section>
 
       {/* =========================================================
          PHOTO GALLERY
