@@ -3,25 +3,11 @@
  File: App.jsx
 **********************************************************************/
 
-import { useState, useRef, useEffect } from "react";
-import SoundcloudFeed from "./components/SoundcloudFeed";
+import { useState, useEffect } from "react";
+
 import logo from "./assets/bj11.png";
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
-
-{/* =========================================================
-   SESSIONS
-========================================================= */}
-
-<section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
-
-  <h2 className="text-3xl mb-10">
-    Sesiones recientes
-  </h2>
-
-  <SoundcloudFeed />
-
-</section>
 
 /**********************************************************************
  DATA — PHOTOS
@@ -40,31 +26,43 @@ const photos = [
 **********************************************************************/
 
 export default function DJLanding() {
-  const [current, setCurrent] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  const audioRef = useRef(null);
 
-  const playSession = (session) => {
-    setCurrent(session);
-    setPlaying(true);
-  };
+  const [tracks, setTracks] = useState([]);
+
+  /******************************************************************
+   FETCH SOUNDCLOUD RSS FEED
+  ******************************************************************/
 
   useEffect(() => {
-    if (!audioRef.current) return;
-    if (playing) audioRef.current.play();
-  }, [current]);
 
-  const togglePlay = () => {
-    if (!audioRef.current) return;
+    const feed =
+      "https://api.allorigins.win/raw?url=" +
+      encodeURIComponent(
+        "https://feeds.soundcloud.com/users/soundcloud:users:17469059/sounds.rss"
+      );
 
-    if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
-    } else {
-      audioRef.current.play();
-      setPlaying(true);
-    }
-  };
+    fetch(feed)
+      .then(res => res.text())
+      .then(str => {
+
+        const parser = new window.DOMParser();
+        const xml = parser.parseFromString(str, "text/xml");
+
+        const items = Array.from(xml.querySelectorAll("item"));
+
+        const parsed = items.map(item => ({
+          title: item.querySelector("title").textContent,
+          link: item.querySelector("link").textContent
+        }));
+
+        setTracks(parsed);
+
+      });
+
+  }, []);
+
+  const latestMix = tracks[0];
+  const previousMixes = tracks.slice(1, 7);
 
   return (
     <div className="bg-[#0E0E0E] text-[#EDEDED] min-h-screen font-sans">
@@ -91,20 +89,17 @@ export default function DJLanding() {
       </header>
 
       {/* =========================================================
-         HERO
+         HERO — LATEST MIX
       ========================================================= */}
 
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-        {/* animated waveform background */}
         <WaveBackground />
 
-        {/* radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)]"></div>
 
         <div className="relative z-10 max-w-xl mx-auto px-6">
 
-          {/* logo */}
           <div className="relative flex justify-center mb-10">
 
             <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
@@ -117,13 +112,9 @@ export default function DJLanding() {
 
           </div>
 
-          {/* genre */}
           <p className="text-[#8C8C8C] mb-6">
             Ambient / Chill House
           </p>
-
-          {/* soundcloud player */}
-          <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
           {latestMix && (
 
@@ -133,29 +124,45 @@ export default function DJLanding() {
               scrolling="no"
               frameBorder="no"
               allow="autoplay"
-              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(latestMix)}&color=%239be7d8&auto_play=false&show_artwork=true&visual=true`}            ></iframe>
-             />
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(latestMix.link)}&color=%239be7d8&auto_play=false&show_artwork=true&visual=true`}
+            ></iframe>
 
           )}
-          </div>
 
         </div>
 
       </section>
 
-{/* =========================================================
-   SESSIONS
-========================================================= */}
+      {/* =========================================================
+         SESSIONS
+      ========================================================= */}
 
-<section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
+      <section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
 
-  <h2 className="text-3xl mb-10">
-    Sesiones recientes
-  </h2>
+        <h2 className="text-3xl mb-10">
+          Sesiones recientes
+        </h2>
 
-  <SoundcloudFeed />
+        <div className="grid md:grid-cols-2 gap-8">
 
-</section>
+          {previousMixes.map((track, i) => (
+
+            <iframe
+              key={i}
+              width="100%"
+              height="166"
+              scrolling="no"
+              frameBorder="no"
+              allow="autoplay"
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.link)}&color=%239be7d8`}
+              className="rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.15)]"
+            />
+
+          ))}
+
+        </div>
+
+      </section>
 
       {/* =========================================================
          PHOTO GALLERY
@@ -194,8 +201,7 @@ export default function DJLanding() {
           <p className="text-[#8C8C8C] leading-relaxed">
             Mezclando pads cálidos, grooves lentos y texturas melódicas,
             B.J11 crea sets diseñados para tardes tranquilas y sesiones
-            al amanecer. Cada mezcla explora el deep house, ambient house
-            y ritmos downtempo grabados en vivo.
+            al amanecer.
           </p>
 
         </div>
@@ -221,9 +227,6 @@ export default function DJLanding() {
 
       </section>
 
-
-
-     
       {/* =========================================================
          FOOTER
       ========================================================= */}
