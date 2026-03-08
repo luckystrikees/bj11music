@@ -6,6 +6,8 @@
 import { useState, useEffect } from "react";
 
 import logo from "./assets/bj11.png";
+import fercho from "./assets/fercho.png";
+
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
@@ -36,10 +38,7 @@ export default function DJLanding() {
   useEffect(() => {
 
     const feed =
-      "https://api.allorigins.win/raw?url=" +
-      encodeURIComponent(
-        "https://feeds.soundcloud.com/users/soundcloud:users:113724148/sounds.rss"
-      );
+      "https://feeds.soundcloud.com/users/soundcloud:users:113724148/sounds.rss";
 
     fetch(feed)
       .then(res => res.text())
@@ -192,7 +191,7 @@ export default function DJLanding() {
       >
 
         <img
-          src="/src/assets/fercho.png"
+          src={fercho}
           className="rounded-xl w-full object-cover"
         />
 
