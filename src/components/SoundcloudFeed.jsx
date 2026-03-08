@@ -5,7 +5,6 @@ const [tracks, setTracks] = useState([]);
 
 useEffect(() => {
 
-```
 const feed =
   "https://api.allorigins.win/raw?url=" +
   encodeURIComponent(
@@ -32,13 +31,11 @@ fetch(feed)
   .catch(err => {
     console.error("SoundCloud feed failed:", err);
   });
-```
 
 }, []);
 
 return ( <div className="grid md:grid-cols-2 gap-8">
 
-```
   {tracks.map((track, i) => (
 
     <iframe
@@ -55,7 +52,7 @@ return ( <div className="grid md:grid-cols-2 gap-8">
   ))}
 
 </div>
-```
+
 
 );
 }
