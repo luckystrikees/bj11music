@@ -8,7 +8,7 @@ export default function SoundcloudFeed() {
     const feed =
       "https://api.allorigins.win/raw?url=" +
       encodeURIComponent(
-        "https://feeds.soundcloud.com/users/soundcloud:users:17469059/sounds.rss"
+        "https://feeds.soundcloud.com/users/soundcloud:users:113724148/sounds.rss"
       );
 
     fetch(feed)
