@@ -4,8 +4,7 @@
 **********************************************************************/
 
 import { useState } from "react";
-
-import logo from "./assets/bj11.png";
+import SoundcloudFeed from "./components/SoundcloudFeed";import logo from "./assets/bj11.png";
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
@@ -127,61 +126,19 @@ export default function DJLanding() {
 
       </section>
 
-      {/* =========================================================
-         SESSIONS
-      ========================================================= */}
+{/* =========================================================
+   SESSIONS
+========================================================= */}
 
-      <section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
+<section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
 
-        <h2 className="text-3xl mb-10">
-          Sesiones recientes
-        </h2>
+  <h2 className="text-3xl mb-10">
+    Sesiones recientes
+  </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+  <SoundcloudFeed />
 
-          {sessions.map((s, i) => (
-
-            <div
-              key={i}
-              onClick={() => setActiveMix(s)}
-              className="bg-[#171717] rounded-xl overflow-hidden cursor-pointer group transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,211,238,0.2)]"
-            >
-
-              <div className="relative">
-
-                <img
-                  src={s.artwork}
-                  className="w-full h-48 object-cover"
-                />
-
-                {/* play overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition">
-
-                  <div className="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center text-white text-xl">
-                    ▶
-                  </div>
-
-                </div>
-
-              </div>
-
-              <div className="p-5">
-
-                <h3 className="mb-2">{s.title}</h3>
-
-                <p className="text-sm text-[#8C8C8C]">
-                  {s.length} • {s.platform}
-                </p>
-
-              </div>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
+</section>
 
       {/* =========================================================
          MIX MODAL PLAYER
