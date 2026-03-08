@@ -4,7 +4,8 @@
 **********************************************************************/
 
 import { useState } from "react";
-import SoundcloudFeed from "./components/SoundcloudFeed";import logo from "./assets/bj11.png";
+import SoundcloudFeed from "./components/SoundcloudFeed";
+import header from "./assets/header.png"; // Changed from logo to header
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
@@ -86,23 +87,26 @@ export default function DJLanding() {
 
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-        <WaveBackground />
+        {/* Replaced WaveBackground with the new header image */}
+        <div className="absolute inset-0 z-0">
+          <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover" />
+        </div>
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)]"></div>
 
         <div className="relative z-10 max-w-xl mx-auto px-6">
 
+          {/* This section for the old logo is now removed or commented out */}
+          {/*
           <div className="relative flex justify-center mb-10">
-
             <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
-
             <img
               src={logo}
               alt="B.J11 DJ"
               className="relative w-72 md:w-96 rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] drop-shadow-[0_0_40px_rgba(34,211,238,0.35)] transition duration-700 hover:scale-[1.02]"
             />
-
           </div>
+          */}
 
           <p className="text-[#8C8C8C] mb-6">
             Ambient / Chill House
