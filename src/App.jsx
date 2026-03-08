@@ -6,7 +6,6 @@
 import { useState, useRef, useEffect } from "react";
 
 import logo from "./assets/bj11.png";
-
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
@@ -84,11 +83,11 @@ export default function DJLanding() {
   return (
     <div className="bg-[#0E0E0E] text-[#EDEDED] min-h-screen font-sans">
 
-      /******************************************************************
-       NAVIGATION
-      ******************************************************************/
+      {/* =========================================================
+         NAVIGATION
+      ========================================================= */}
 
-      <header className="fixed top-0 left-0 right-0 backdrop-blur bg-black/40 z-20">
+      <header className="fixed top-0 left-0 right-0 backdrop-blur bg-black/40 border-b border-white/5 z-20">
         <div className="max-w-6xl mx-auto flex justify-between p-5">
 
           <div className="font-semibold tracking-widest">
@@ -105,66 +104,59 @@ export default function DJLanding() {
         </div>
       </header>
 
-      /******************************************************************
-       HERO
-      ******************************************************************/
+      {/* =========================================================
+         HERO
+      ========================================================= */}
 
-{/* HERO SECTION */}
+      <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-<section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
+        {/* animated waveform background */}
+        <WaveBackground />
 
-  {/* background gradient */}
-  <div className="absolute inset-0 bg-gradient-to-br from-[#9BE7D8]/20 via-transparent to-[#F2C6FF]/20"></div>
+        {/* radial glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)]"></div>
 
-  <div className="relative z-10 max-w-xl mx-auto">
+        <div className="relative z-10 max-w-xl mx-auto px-6">
 
-    {/* logo block */}
-    <div className="relative flex justify-center mb-10">
+          {/* logo */}
+          <div className="relative flex justify-center mb-10">
 
-      <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
+            <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
 
-      <img
-        src={logo}
-        alt="B.J11 DJ"
-        className="
-          relative
-          w-72 md:w-96
-          rounded-2xl
-          shadow-[0_30px_80px_rgba(0,0,0,0.8)]
-          drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
-          transition duration-700
-          hover:scale-[1.02]
-        "
-      />
+            <img
+              src={logo}
+              alt="B.J11 DJ"
+              className="relative w-72 md:w-96 rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] drop-shadow-[0_0_40px_rgba(34,211,238,0.35)] transition duration-700 hover:scale-[1.02]"
+            />
 
-    </div>
+          </div>
 
-    {/* genre text */}
-    <p className="text-[#8C8C8C] mb-6">
-      Ambient / Chill House
-    </p>
+          {/* genre */}
+          <p className="text-[#8C8C8C] mb-6">
+            Ambient / Chill House
+          </p>
 
-    {/* soundcloud player */}
-    <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+          {/* soundcloud player */}
+          <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
-      <iframe
-        width="100%"
-        height="300"
-        scrolling="no"
-        frameBorder="no"
-        allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
-      ></iframe>
+            <iframe
+              width="100%"
+              height="300"
+              scrolling="no"
+              frameBorder="no"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
+            ></iframe>
 
-    </div>
+          </div>
 
-  </div>
+        </div>
 
-</section>
+      </section>
 
-      /******************************************************************
-       SESSIONS
-      ******************************************************************/
+      {/* =========================================================
+         SESSIONS
+      ========================================================= */}
 
       <section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
 
@@ -188,9 +180,7 @@ export default function DJLanding() {
 
               <div className="p-5">
 
-                <h3 className="mb-2">
-                  {s.title}
-                </h3>
+                <h3 className="mb-2">{s.title}</h3>
 
                 <p className="text-sm text-[#8C8C8C] mb-4">
                   {s.length} • {s.platform}
@@ -213,9 +203,9 @@ export default function DJLanding() {
 
       </section>
 
-      /******************************************************************
-       PHOTO GALLERY
-      ******************************************************************/
+      {/* =========================================================
+         PHOTO GALLERY
+      ========================================================= */}
 
       <section id="photos" className="max-w-6xl mx-auto px-6 pb-24">
 
@@ -227,9 +217,9 @@ export default function DJLanding() {
 
       </section>
 
-      /******************************************************************
-       ABOUT
-      ******************************************************************/
+      {/* =========================================================
+         ABOUT
+      ========================================================= */}
 
       <section
         id="about"
@@ -237,7 +227,7 @@ export default function DJLanding() {
       >
 
         <img
-          src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53"
+          src="/src/assets/fercho.png"
           className="rounded-xl w-full object-cover"
         />
 
@@ -258,9 +248,9 @@ export default function DJLanding() {
 
       </section>
 
-      /******************************************************************
-       CONTACT
-      ******************************************************************/
+      {/* =========================================================
+         CONTACT
+      ========================================================= */}
 
       <section id="contact" className="text-center pb-24">
 
@@ -277,42 +267,12 @@ export default function DJLanding() {
 
       </section>
 
-      /******************************************************************
-       MINI AUDIO PLAYER
-      ******************************************************************/
 
-      {current && (
 
-        <div className="fixed bottom-6 right-6 bg-[#171717]/80 backdrop-blur p-4 rounded-xl w-80 shadow-lg">
-
-          <div className="text-sm mb-2">
-            {current.title}
-          </div>
-
-          <div className="flex items-center justify-between">
-
-            <button
-              onClick={togglePlay}
-              className="px-4 py-2 border border-[#9BE7D8]/40 rounded-full"
-            >
-              {playing ? "Pausa" : "Reproducir"}
-            </button>
-
-            <span className="text-xs text-[#8C8C8C]">
-              {current.platform}
-            </span>
-
-          </div>
-
-          <audio ref={audioRef} src={current.audio} />
-
-        </div>
-
-      )}
-
-      /******************************************************************
-       FOOTER
-      ******************************************************************/
+     
+      {/* =========================================================
+         FOOTER
+      ========================================================= */}
 
       <footer className="text-center py-12 text-[#8C8C8C] text-sm">
 
@@ -322,9 +282,7 @@ export default function DJLanding() {
           <a href="#">Instagram</a>
         </div>
 
-        <div>
-          © 2026 B.J11
-        </div>
+        <div>© 2026 B.J11</div>
 
       </footer>
 
