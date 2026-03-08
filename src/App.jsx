@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import logo from "./assets/bj11.png";
 
 const sessions = [
   {
@@ -81,8 +82,13 @@ export default function DJLanding() {
         <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF] animate-[pulse_6s_ease-in-out_infinite]" />
 
         <div className="relative z-10">
-          <h1 className="text-5xl font-semibold mb-4">B.J11</h1>
-          <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>
+        <img
+          src={logo}
+          alt="B.J11 DJ"
+          className="mx-auto mb-6 max-w-xs md:max-w-md"
+        />
+
+        <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>  
 
           <button
             onClick={() => playSession(sessions[0])}
