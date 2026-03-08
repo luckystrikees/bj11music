@@ -109,59 +109,58 @@ export default function DJLanding() {
        HERO
       ******************************************************************/
 
-      <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
+{/* HERO SECTION */}
 
-        {/* animated waveform background */}
-        <WaveBackground />
+<section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-        {/* gradient overlay */}
-        <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF]"></div>
+  {/* background gradient */}
+  <div className="absolute inset-0 bg-gradient-to-br from-[#9BE7D8]/20 via-transparent to-[#F2C6FF]/20"></div>
 
-          <div className="relative flex justify-center mb-10">
+  <div className="relative z-10 max-w-xl mx-auto">
 
-            {/* ambient glow */}
-            <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
+    {/* logo block */}
+    <div className="relative flex justify-center mb-10">
 
-            {/* soft vignette behind image */}
-            <div className="absolute w-[380px] h-[380px] rounded-2xl bg-gradient-to-b from-transparent via-black/20 to-black/60 blur-xl"></div>
+      <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
 
-            <img
-              src={logo}
-              alt="B.J11 DJ"
-              className="
-                relative
-                w-72 md:w-96
-                rounded-2xl
-                shadow-[0_30px_80px_rgba(0,0,0,0.8)]
-                drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
-                transition duration-700
-                hover:scale-[1.02]
-              "
-            />
+      <img
+        src={logo}
+        alt="B.J11 DJ"
+        className="
+          relative
+          w-72 md:w-96
+          rounded-2xl
+          shadow-[0_30px_80px_rgba(0,0,0,0.8)]
+          drop-shadow-[0_0_40px_rgba(34,211,238,0.35)]
+          transition duration-700
+          hover:scale-[1.02]
+        "
+      />
 
-          </div>
+    </div>
 
-          <p className="text-[#8C8C8C] mb-6">
-            Ambient / Chill House
-          </p>
+    {/* genre text */}
+    <p className="text-[#8C8C8C] mb-6">
+      Ambient / Chill House
+    </p>
 
-          {/* SoundCloud embedded player */}
-          <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+    {/* soundcloud player */}
+    <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
-            <iframe
-              width="100%"
-              height="300"
-              scrolling="no"
-              frameBorder="no"
-              allow="autoplay"
-              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
-            ></iframe>
+      <iframe
+        width="100%"
+        height="300"
+        scrolling="no"
+        frameBorder="no"
+        allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
+      ></iframe>
 
-          </div>
+    </div>
 
-        </div>
+  </div>
 
-      </section>
+</section>
 
       /******************************************************************
        SESSIONS
