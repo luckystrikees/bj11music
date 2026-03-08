@@ -3,11 +3,12 @@
  File: App.jsx
 **********************************************************************/
 
+import { useState, useRef, useEffect } from "react";
+
+import logo from "./assets/bj11.png";
+
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
-import SoundcloudSessions from "./components/SoundcloudSessions";
-import { useState, useRef, useEffect } from "react";
-import logo from "./assets/bj11.png";
 
 /**********************************************************************
  DATA — SESSIONS
@@ -105,13 +106,16 @@ export default function DJLanding() {
       </header>
 
       /******************************************************************
-       HERO SECTION
+       HERO
       ******************************************************************/
 
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-        {/* background gradient */}
-        <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF] animate-[pulse_6s_ease-in-out_infinite]" />
+        {/* animated waveform background */}
+        <WaveBackground />
+
+        {/* gradient overlay */}
+        <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF]"></div>
 
         <div className="relative z-10 max-w-xl mx-auto">
 
@@ -132,7 +136,7 @@ export default function DJLanding() {
             Ambient / Chill House
           </p>
 
-          {/* SoundCloud large visual player */}
+          {/* SoundCloud embedded player */}
           <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
             <iframe
@@ -211,25 +215,7 @@ export default function DJLanding() {
           Ambiente
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-4">
-
-          {photos.map((p, i) => (
-
-            <div
-              key={i}
-              className="overflow-hidden rounded-lg group cursor-pointer"
-            >
-
-              <img
-                src={p}
-                className="w-full h-64 object-cover group-hover:scale-110 transition duration-700"
-              />
-
-            </div>
-
-          ))}
-
-        </div>
+        <PhotoLightbox photos={photos} />
 
       </section>
 
