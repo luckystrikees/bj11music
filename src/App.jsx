@@ -1,5 +1,17 @@
+/**********************************************************************
+ DJ LANDING PAGE
+ File: App.jsx
+**********************************************************************/
+
+import WaveBackground from "./components/WaveBackground";
+import PhotoLightbox from "./components/PhotoLightbox";
+import SoundcloudSessions from "./components/SoundcloudSessions";
 import { useState, useRef, useEffect } from "react";
 import logo from "./assets/bj11.png";
+
+/**********************************************************************
+ DATA — SESSIONS
+**********************************************************************/
 
 const sessions = [
   {
@@ -25,6 +37,10 @@ const sessions = [
   },
 ];
 
+/**********************************************************************
+ DATA — PHOTOS
+**********************************************************************/
+
 const photos = [
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
   "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
@@ -32,6 +48,10 @@ const photos = [
   "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
   "https://images.unsplash.com/photo-1487180144351-b8472da7d491",
 ];
+
+/**********************************************************************
+ MAIN COMPONENT
+**********************************************************************/
 
 export default function DJLanding() {
   const [current, setCurrent] = useState(null);
@@ -63,10 +83,16 @@ export default function DJLanding() {
   return (
     <div className="bg-[#0E0E0E] text-[#EDEDED] min-h-screen font-sans">
 
-      {/* Navegación */}
+      /******************************************************************
+       NAVIGATION
+      ******************************************************************/
+
       <header className="fixed top-0 left-0 right-0 backdrop-blur bg-black/40 z-20">
         <div className="max-w-6xl mx-auto flex justify-between p-5">
-          <div className="font-semibold tracking-widest">B.J11</div>
+
+          <div className="font-semibold tracking-widest">
+            B.J11
+          </div>
 
           <nav className="space-x-6 text-sm">
             <a href="#sessions" className="hover:text-[#9BE7D8]">Sesiones</a>
@@ -74,75 +100,85 @@ export default function DJLanding() {
             <a href="#about" className="hover:text-[#9BE7D8]">Sobre mí</a>
             <a href="#contact" className="hover:text-[#9BE7D8]">Contacto</a>
           </nav>
+
         </div>
       </header>
 
-      {/* Hero */}
+      /******************************************************************
+       HERO SECTION
+      ******************************************************************/
+
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
+
+        {/* background gradient */}
         <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF] animate-[pulse_6s_ease-in-out_infinite]" />
 
-        <div className="relative flex justify-center mb-8">
+        <div className="relative z-10 max-w-xl mx-auto">
 
-          {/* glow behind logo */}
-          <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-cyan-400/20 blur-3xl"></div>
+          {/* logo + glow */}
+          <div className="relative flex justify-center mb-8">
 
-          <img
-            src={logo}
-            alt="B.J11 DJ"
-            className="
-              relative
-              w-64 md:w-80 lg:w-96
-              drop-shadow-[0_0_35px_rgba(34,211,238,0.45)]
-              transition-transform duration-700
-              hover:scale-105
-            "
-          />
+            <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-cyan-400/20 blur-3xl"></div>
+
+            <img
+              src={logo}
+              alt="B.J11 DJ"
+              className="relative w-64 md:w-80 lg:w-96 drop-shadow-[0_0_35px_rgba(34,211,238,0.45)] transition-transform duration-700 hover:scale-105"
+            />
+
+          </div>
+
+          <p className="text-[#8C8C8C] mb-6">
+            Ambient / Chill House
+          </p>
+
+          {/* SoundCloud large visual player */}
+          <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+
+            <iframe
+              width="100%"
+              height="300"
+              scrolling="no"
+              frameBorder="no"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
+            ></iframe>
+
+          </div>
 
         </div>
 
-        <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>  
-
-        <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>
-
-        <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
-          <iframe
-            width="100%"
-            height="166"
-            scrolling="no"
-            frameBorder="no"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true"
-          ></iframe>
-        </div>
-        
-          <a
-            href="https://soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session?si=c42176721a6541c1a6a331f92cfb11e8&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-6 py-3 bg-[#171717] border border-[#9BE7D8]/40 rounded-full hover:shadow-[0_0_20px_rgba(155,231,216,0.4)] transition"
-          >
-            Reproducir última sesión
-          </a>
-        </div>
       </section>
 
-      {/* Sesiones */}
+      /******************************************************************
+       SESSIONS
+      ******************************************************************/
+
       <section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
-        <h2 className="text-3xl mb-10">Sesiones recientes</h2>
+
+        <h2 className="text-3xl mb-10">
+          Sesiones recientes
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
+
           {sessions.map((s, i) => (
+
             <div
               key={i}
               className="bg-[#171717] rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(155,231,216,0.15)] transition"
             >
+
               <img
                 src={s.artwork}
                 className="w-full h-48 object-cover"
               />
 
               <div className="p-5">
-                <h3 className="mb-2">{s.title}</h3>
+
+                <h3 className="mb-2">
+                  {s.title}
+                </h3>
 
                 <p className="text-sm text-[#8C8C8C] mb-4">
                   {s.length} • {s.platform}
@@ -154,43 +190,68 @@ export default function DJLanding() {
                 >
                   Reproducir
                 </button>
+
               </div>
+
             </div>
+
           ))}
+
         </div>
+
       </section>
 
-      {/* Fotos */}
+      /******************************************************************
+       PHOTO GALLERY
+      ******************************************************************/
+
       <section id="photos" className="max-w-6xl mx-auto px-6 pb-24">
-        <h2 className="text-3xl mb-10">Ambiente</h2>
+
+        <h2 className="text-3xl mb-10">
+          Ambiente
+        </h2>
 
         <div className="grid md:grid-cols-3 gap-4">
+
           {photos.map((p, i) => (
+
             <div
               key={i}
               className="overflow-hidden rounded-lg group cursor-pointer"
             >
+
               <img
                 src={p}
                 className="w-full h-64 object-cover group-hover:scale-110 transition duration-700"
               />
+
             </div>
+
           ))}
+
         </div>
+
       </section>
 
-      {/* Sobre mí */}
+      /******************************************************************
+       ABOUT
+      ******************************************************************/
+
       <section
         id="about"
         className="max-w-5xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center"
       >
+
         <img
           src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53"
           className="rounded-xl w-full object-cover"
         />
 
         <div>
-          <h2 className="text-3xl mb-6">Sobre mí</h2>
+
+          <h2 className="text-3xl mb-6">
+            Sobre mí
+          </h2>
 
           <p className="text-[#8C8C8C] leading-relaxed">
             Mezclando pads cálidos, grooves lentos y texturas melódicas,
@@ -198,27 +259,44 @@ export default function DJLanding() {
             al amanecer. Cada mezcla explora el deep house, ambient house
             y ritmos downtempo grabados en vivo.
           </p>
+
         </div>
+
       </section>
 
-      {/* Contacto */}
+      /******************************************************************
+       CONTACT
+      ******************************************************************/
+
       <section id="contact" className="text-center pb-24">
-        <h2 className="text-3xl mb-6">Reservas</h2>
+
+        <h2 className="text-3xl mb-6">
+          Reservas
+        </h2>
 
         <a
           href="mailto:info@bj11music.com"
           className="text-[#9BE7D8] hover:drop-shadow-[0_0_10px_rgba(155,231,216,0.6)]"
         >
-          email@domain.com
+          info@bj11music.com
         </a>
+
       </section>
 
-      {/* Reproductor */}
+      /******************************************************************
+       MINI AUDIO PLAYER
+      ******************************************************************/
+
       {current && (
+
         <div className="fixed bottom-6 right-6 bg-[#171717]/80 backdrop-blur p-4 rounded-xl w-80 shadow-lg">
-          <div className="text-sm mb-2">{current.title}</div>
+
+          <div className="text-sm mb-2">
+            {current.title}
+          </div>
 
           <div className="flex items-center justify-between">
+
             <button
               onClick={togglePlay}
               className="px-4 py-2 border border-[#9BE7D8]/40 rounded-full"
@@ -229,22 +307,33 @@ export default function DJLanding() {
             <span className="text-xs text-[#8C8C8C]">
               {current.platform}
             </span>
+
           </div>
 
           <audio ref={audioRef} src={current.audio} />
+
         </div>
+
       )}
 
-      {/* Footer */}
+      /******************************************************************
+       FOOTER
+      ******************************************************************/
+
       <footer className="text-center py-12 text-[#8C8C8C] text-sm">
+
         <div className="space-x-6 mb-3">
           <a href="#">SoundCloud</a>
           <a href="#">Mixcloud</a>
           <a href="#">Instagram</a>
         </div>
 
-        <div>© 2026 B.J11</div>
+        <div>
+          © 2026 B.J11
+        </div>
+
       </footer>
+
     </div>
   );
 }
