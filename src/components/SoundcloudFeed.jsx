@@ -5,21 +5,27 @@ export default function SoundcloudFeed() {
 
   useEffect(() => {
 
-    const urls = [
-      "https://soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session"
-    ];
+    const feed =
+      "https://api.allorigins.win/raw?url=" +
+      encodeURIComponent(
+        "https://feeds.soundcloud.com/users/soundcloud:users:17469059/sounds.rss"
+      );
 
-    Promise.all(
-      urls.map((url) =>
-        fetch(
-          `https://soundcloud.com/oembed?format=json&url=${encodeURIComponent(
-            url
-          )}`
-        ).then((res) => res.json())
-      )
-    ).then((data) => {
-      setTracks(data);
-    });
+    fetch(feed)
+      .then(res => res.text())
+      .then(str => {
+        const parser = new window.DOMParser();
+        const xml = parser.parseFromString(str, "text/xml");
+
+        const items = Array.from(xml.querySelectorAll("item")).slice(1, 7);
+
+        const parsed = items.map(item => ({
+          title: item.querySelector("title").textContent,
+          link: item.querySelector("link").textContent
+        }));
+
+        setTracks(parsed);
+      });
 
   }, []);
 
@@ -27,11 +33,18 @@ export default function SoundcloudFeed() {
     <div className="grid md:grid-cols-2 gap-8">
 
       {tracks.map((track, i) => (
-        <div
+
+        <iframe
           key={i}
-          className="rounded-xl overflow-hidden shadow-[0_0_20px_rgba(34,211,238,0.15)]"
-          dangerouslySetInnerHTML={{ __html: track.html }}
+          width="100%"
+          height="166"
+          scrolling="no"
+          frameBorder="no"
+          allow="autoplay"
+          src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.link)}&color=%239be7d8`}
+          className="rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.15)]"
         />
+
       ))}
 
     </div>
