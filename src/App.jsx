@@ -102,6 +102,19 @@ export default function DJLanding() {
 
         <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>  
 
+        <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>
+
+        <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+          <iframe
+            width="100%"
+            height="166"
+            scrolling="no"
+            frameBorder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&hide_related=false&show_comments=false&show_user=true&show_reposts=false&show_teaser=true"
+          ></iframe>
+        </div>
+        
           <a
             href="https://soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session?si=c42176721a6541c1a6a331f92cfb11e8&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing"
             target="_blank"
