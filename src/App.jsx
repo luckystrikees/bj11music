@@ -241,7 +241,7 @@ export default function DJLanding() {
       >
 
         <img
-          src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53"
+          src="/src/assets/fercho.png"
           className="rounded-xl w-full object-cover"
         />
 
