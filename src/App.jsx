@@ -9,33 +9,19 @@ import logo from "./assets/bj11.png";
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
-/**********************************************************************
- DATA — SESSIONS
-**********************************************************************/
+{/* =========================================================
+   SESSIONS
+========================================================= */}
 
-const sessions = [
-  {
-    title: "Sesión Atardecer de Domingo",
-    length: "1:04:32",
-    platform: "SoundCloud",
-    artwork: "https://images.unsplash.com/photo-1506157786151-b8491531f063",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  },
-  {
-    title: "Mix Balcón de Medianoche",
-    length: "58:21",
-    platform: "Mixcloud",
-    artwork: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-  },
-  {
-    title: "Deriva Nocturna",
-    length: "1:12:10",
-    platform: "YouTube",
-    artwork: "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-  },
-];
+<section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
+
+  <h2 className="text-3xl mb-10">
+    Sesiones recientes
+  </h2>
+
+  <SoundcloudFeed />
+
+</section>
 
 /**********************************************************************
  DATA — PHOTOS
