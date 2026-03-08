@@ -81,12 +81,24 @@ export default function DJLanding() {
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
         <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-[#9BE7D8] via-transparent to-[#F2C6FF] animate-[pulse_6s_ease-in-out_infinite]" />
 
-        <div className="relative z-10">
-        <img
-          src={logo}
-          alt="B.J11 DJ"
-          className="mx-auto mb-6 max-w-xs md:max-w-md"
-        />
+        <div className="relative flex justify-center mb-8">
+
+          {/* glow behind logo */}
+          <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-full bg-cyan-400/20 blur-3xl"></div>
+
+          <img
+            src={logo}
+            alt="B.J11 DJ"
+            className="
+              relative
+              w-64 md:w-80 lg:w-96
+              drop-shadow-[0_0_35px_rgba(34,211,238,0.45)]
+              transition-transform duration-700
+              hover:scale-105
+            "
+          />
+
+        </div>
 
         <p className="text-[#8C8C8C] mb-6">Ambient / Chill House</p>  
 
