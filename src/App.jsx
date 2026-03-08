@@ -3,11 +3,39 @@
  File: App.jsx
 **********************************************************************/
 
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import logo from "./assets/bj11.png";
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
+
+/**********************************************************************
+ DATA — SESSIONS
+**********************************************************************/
+
+const sessions = [
+  {
+    title: "Sesión Atardecer de Domingo",
+    length: "1:04:32",
+    platform: "SoundCloud",
+    artwork: "https://images.unsplash.com/photo-1506157786151-b8491531f063",
+    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+  },
+  {
+    title: "Mix Balcón de Medianoche",
+    length: "58:21",
+    platform: "Mixcloud",
+    artwork: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
+    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+  },
+  {
+    title: "Deriva Nocturna",
+    length: "1:12:10",
+    platform: "YouTube",
+    artwork: "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
+    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+  },
+];
 
 /**********************************************************************
  DATA — PHOTOS
@@ -26,46 +54,31 @@ const photos = [
 **********************************************************************/
 
 export default function DJLanding() {
+  const [current, setCurrent] = useState(null);
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef(null);
 
-  const [tracks, setTracks] = useState([]);
-
-  /******************************************************************
-   FETCH SOUNDCLOUD RSS FEED
-  ******************************************************************/
+  const playSession = (session) => {
+    setCurrent(session);
+    setPlaying(true);
+  };
 
   useEffect(() => {
+    if (!audioRef.current) return;
+    if (playing) audioRef.current.play();
+  }, [current]);
 
-    const feed =
-      "https://api.allorigins.win/raw?url=" +
-      encodeURIComponent(
-        "https://feeds.soundcloud.com/users/soundcloud:users:17469059/sounds.rss"
-      );
+  const togglePlay = () => {
+    if (!audioRef.current) return;
 
-    fetch(feed)
-      .then(res => res.text())
-      .then(str => {
-
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(str, "text/xml");
-
-        const items = Array.from(xml.querySelectorAll("item"));
-
-        const parsed = items.map(item => ({
-          title: item.querySelector("title")?.textContent,
-          link: item.querySelector("link")?.textContent
-        }));
-
-        setTracks(parsed);
-
-      })
-      .catch(err => {
-        console.error("SoundCloud feed failed:", err);
-      });
-
-  }, []);
-
-  const latestMix = tracks.length > 0 ? tracks[0] : null;
-  const previousMixes = tracks.length > 1 ? tracks.slice(1, 7) : [];
+    if (playing) {
+      audioRef.current.pause();
+      setPlaying(false);
+    } else {
+      audioRef.current.play();
+      setPlaying(true);
+    }
+  };
 
   return (
     <div className="bg-[#0E0E0E] text-[#EDEDED] min-h-screen font-sans">
@@ -92,17 +105,20 @@ export default function DJLanding() {
       </header>
 
       {/* =========================================================
-         HERO — LATEST MIX
+         HERO
       ========================================================= */}
 
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
+        {/* animated waveform background */}
         <WaveBackground />
 
+        {/* radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)]"></div>
 
         <div className="relative z-10 max-w-xl mx-auto px-6">
 
+          {/* logo */}
           <div className="relative flex justify-center mb-10">
 
             <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
@@ -115,11 +131,13 @@ export default function DJLanding() {
 
           </div>
 
+          {/* genre */}
           <p className="text-[#8C8C8C] mb-6">
             Ambient / Chill House
           </p>
 
-          {latestMix && (
+          {/* soundcloud player */}
+          <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
             <iframe
               width="100%"
@@ -127,11 +145,10 @@ export default function DJLanding() {
               scrolling="no"
               frameBorder="no"
               allow="autoplay"
-              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(latestMix.link)}&color=%239be7d8&auto_play=false&show_artwork=true&visual=true`}
-              className="rounded-xl shadow-[0_0_25px_rgba(34,211,238,0.25)]"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
             ></iframe>
 
-          )}
+          </div>
 
         </div>
 
@@ -147,20 +164,38 @@ export default function DJLanding() {
           Sesiones recientes
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-3 gap-8">
 
-          {previousMixes.map((track, i) => (
+          {sessions.map((s, i) => (
 
-            <iframe
+            <div
               key={i}
-              width="100%"
-              height="166"
-              scrolling="no"
-              frameBorder="no"
-              allow="autoplay"
-              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(track.link)}&color=%239be7d8`}
-              className="rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.15)]"
-            />
+              className="bg-[#171717] rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(155,231,216,0.15)] transition"
+            >
+
+              <img
+                src={s.artwork}
+                className="w-full h-48 object-cover"
+              />
+
+              <div className="p-5">
+
+                <h3 className="mb-2">{s.title}</h3>
+
+                <p className="text-sm text-[#8C8C8C] mb-4">
+                  {s.length} • {s.platform}
+                </p>
+
+                <button
+                  onClick={() => playSession(s)}
+                  className="text-sm px-4 py-2 border border-[#9BE7D8]/40 rounded-full hover:bg-[#9BE7D8]/10"
+                >
+                  Reproducir
+                </button>
+
+              </div>
+
+            </div>
 
           ))}
 
@@ -192,7 +227,7 @@ export default function DJLanding() {
       >
 
         <img
-          src="/src/assets/fercho.png"
+          src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53"
           className="rounded-xl w-full object-cover"
         />
 
@@ -205,7 +240,8 @@ export default function DJLanding() {
           <p className="text-[#8C8C8C] leading-relaxed">
             Mezclando pads cálidos, grooves lentos y texturas melódicas,
             B.J11 crea sets diseñados para tardes tranquilas y sesiones
-            al amanecer.
+            al amanecer. Cada mezcla explora el deep house, ambient house
+            y ritmos downtempo grabados en vivo.
           </p>
 
         </div>
@@ -230,6 +266,37 @@ export default function DJLanding() {
         </a>
 
       </section>
+
+      {/* =========================================================
+         MINI AUDIO PLAYER
+      ========================================================= */}
+
+      {current && (
+
+        <div className="fixed bottom-6 right-6 bg-[#171717]/80 backdrop-blur p-4 rounded-xl w-80 shadow-lg">
+
+          <div className="text-sm mb-2">{current.title}</div>
+
+          <div className="flex items-center justify-between">
+
+            <button
+              onClick={togglePlay}
+              className="px-4 py-2 border border-[#9BE7D8]/40 rounded-full"
+            >
+              {playing ? "Pausa" : "Reproducir"}
+            </button>
+
+            <span className="text-xs text-[#8C8C8C]">
+              {current.platform}
+            </span>
+
+          </div>
+
+          <audio ref={audioRef} src={current.audio} />
+
+        </div>
+
+      )}
 
       {/* =========================================================
          FOOTER
