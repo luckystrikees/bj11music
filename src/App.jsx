@@ -125,15 +125,18 @@ export default function DJLanding() {
           {/* soundcloud player */}
           <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
+          {latestMix && (
+
             <iframe
               width="100%"
               height="300"
               scrolling="no"
               frameBorder="no"
               allow="autoplay"
-              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
-            ></iframe>
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(latestMix)}&color=%239be7d8&auto_play=false&show_artwork=true&visual=true`}            ></iframe>
+             />
 
+          )}
           </div>
 
         </div>
