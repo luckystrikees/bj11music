@@ -3,7 +3,7 @@
  File: App.jsx
 **********************************************************************/
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 import logo from "./assets/bj11.png";
 import WaveBackground from "./components/WaveBackground";
@@ -19,21 +19,21 @@ const sessions = [
     length: "1:04:32",
     platform: "SoundCloud",
     artwork: "https://images.unsplash.com/photo-1506157786151-b8491531f063",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    link: "https://soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session",
   },
   {
     title: "Mix Balcón de Medianoche",
     length: "58:21",
-    platform: "Mixcloud",
+    platform: "SoundCloud",
     artwork: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    link: "https://soundcloud.com",
   },
   {
     title: "Deriva Nocturna",
     length: "1:12:10",
-    platform: "YouTube",
+    platform: "SoundCloud",
     artwork: "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
-    audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    link: "https://soundcloud.com",
   },
 ];
 
@@ -54,31 +54,8 @@ const photos = [
 **********************************************************************/
 
 export default function DJLanding() {
-  const [current, setCurrent] = useState(null);
-  const [playing, setPlaying] = useState(false);
-  const audioRef = useRef(null);
 
-  const playSession = (session) => {
-    setCurrent(session);
-    setPlaying(true);
-  };
-
-  useEffect(() => {
-    if (!audioRef.current) return;
-    if (playing) audioRef.current.play();
-  }, [current]);
-
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-
-    if (playing) {
-      audioRef.current.pause();
-      setPlaying(false);
-    } else {
-      audioRef.current.play();
-      setPlaying(true);
-    }
-  };
+  const [activeMix, setActiveMix] = useState(null);
 
   return (
     <div className="bg-[#0E0E0E] text-[#EDEDED] min-h-screen font-sans">
@@ -110,15 +87,12 @@ export default function DJLanding() {
 
       <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
 
-        {/* animated waveform background */}
         <WaveBackground />
 
-        {/* radial glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)]"></div>
 
         <div className="relative z-10 max-w-xl mx-auto px-6">
 
-          {/* logo */}
           <div className="relative flex justify-center mb-10">
 
             <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
@@ -131,12 +105,11 @@ export default function DJLanding() {
 
           </div>
 
-          {/* genre */}
           <p className="text-[#8C8C8C] mb-6">
             Ambient / Chill House
           </p>
 
-          {/* soundcloud player */}
+          {/* hero player */}
           <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
 
             <iframe
@@ -170,28 +143,35 @@ export default function DJLanding() {
 
             <div
               key={i}
-              className="bg-[#171717] rounded-xl overflow-hidden hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(155,231,216,0.15)] transition"
+              onClick={() => setActiveMix(s)}
+              className="bg-[#171717] rounded-xl overflow-hidden cursor-pointer group transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,211,238,0.2)]"
             >
 
-              <img
-                src={s.artwork}
-                className="w-full h-48 object-cover"
-              />
+              <div className="relative">
+
+                <img
+                  src={s.artwork}
+                  className="w-full h-48 object-cover"
+                />
+
+                {/* play overlay */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition">
+
+                  <div className="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center text-white text-xl">
+                    ▶
+                  </div>
+
+                </div>
+
+              </div>
 
               <div className="p-5">
 
                 <h3 className="mb-2">{s.title}</h3>
 
-                <p className="text-sm text-[#8C8C8C] mb-4">
+                <p className="text-sm text-[#8C8C8C]">
                   {s.length} • {s.platform}
                 </p>
-
-                <button
-                  onClick={() => playSession(s)}
-                  className="text-sm px-4 py-2 border border-[#9BE7D8]/40 rounded-full hover:bg-[#9BE7D8]/10"
-                >
-                  Reproducir
-                </button>
 
               </div>
 
@@ -202,6 +182,40 @@ export default function DJLanding() {
         </div>
 
       </section>
+
+      {/* =========================================================
+         MIX MODAL PLAYER
+      ========================================================= */}
+
+      {activeMix && (
+
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+          <div className="bg-[#111] rounded-xl max-w-xl w-full p-6 relative">
+
+            <button
+              onClick={() => setActiveMix(null)}
+              className="absolute top-4 right-4 text-white/70 hover:text-white"
+            >
+              ✕
+            </button>
+
+            <h3 className="mb-4 text-lg">{activeMix.title}</h3>
+
+            <iframe
+              width="100%"
+              height="166"
+              scrolling="no"
+              frameBorder="no"
+              allow="autoplay"
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(activeMix.link)}&color=%239be7d8`}
+            ></iframe>
+
+          </div>
+
+        </div>
+
+      )}
 
       {/* =========================================================
          PHOTO GALLERY
@@ -266,37 +280,6 @@ export default function DJLanding() {
         </a>
 
       </section>
-
-      {/* =========================================================
-         MINI AUDIO PLAYER
-      ========================================================= */}
-
-      {current && (
-
-        <div className="fixed bottom-6 right-6 bg-[#171717]/80 backdrop-blur p-4 rounded-xl w-80 shadow-lg">
-
-          <div className="text-sm mb-2">{current.title}</div>
-
-          <div className="flex items-center justify-between">
-
-            <button
-              onClick={togglePlay}
-              className="px-4 py-2 border border-[#9BE7D8]/40 rounded-full"
-            >
-              {playing ? "Pausa" : "Reproducir"}
-            </button>
-
-            <span className="text-xs text-[#8C8C8C]">
-              {current.platform}
-            </span>
-
-          </div>
-
-          <audio ref={audioRef} src={current.audio} />
-
-        </div>
-
-      )}
 
       {/* =========================================================
          FOOTER
