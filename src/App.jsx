@@ -5,43 +5,18 @@
 
 import { useState } from "react";
 import SoundcloudFeed from "./components/SoundcloudFeed";
-import header from "./assets/header.png"; // Changed from logo to header
 import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
-/**********************************************************************
- DATA — SESSIONS
-**********************************************************************/
-
-const sessions = [
-  {
-    title: "Sesión Atardecer de Domingo",
-    length: "1:04:32",
-    platform: "SoundCloud",
-    artwork: "https://images.unsplash.com/photo-1506157786151-b8491531f063",
-    link: "https://soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session",
-  },
-  {
-    title: "Mix Balcón de Medianoche",
-    length: "58:21",
-    platform: "SoundCloud",
-    artwork: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f",
-    link: "https://soundcloud.com",
-  },
-  {
-    title: "Deriva Nocturna",
-    length: "1:12:10",
-    platform: "SoundCloud",
-    artwork: "https://images.unsplash.com/photo-1511379938547-c1f69419868d",
-    link: "https://soundcloud.com",
-  },
-];
+// Import your images here! This fixes the broken image bug.
+import header from "./assets/header.png"; 
+import fercho from "./assets/fercho.png"; 
 
 /**********************************************************************
  DATA — PHOTOS
 **********************************************************************/
 
-const photos = [
+const photos =[
   "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
   "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3",
   "https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2",
@@ -54,8 +29,6 @@ const photos = [
 **********************************************************************/
 
 export default function DJLanding() {
-
-  const [activeMix, setActiveMix] = useState(null);
 
   return (
     <div className="bg-[#0E0E0E] text-[#EDEDED] min-h-screen font-sans">
@@ -94,16 +67,15 @@ export default function DJLanding() {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)] z-10"></div>
 
-        {/* --- ADD THE WAVE BACKGROUND HERE --- */}
+        {/* Wave Background */}
         <WaveBackground />
 
-        {/* Ambient / Chill House text - repositioned to left */}
+        {/* Ambient / Chill House text */}
         <p className="absolute top-28 left-6 md:left-24 text-[#8C8C8C] z-10 text-lg">
           Ambient / Chill House
         </p>
 
-        {/* Interactive SoundCloud Player - Precisely positioned and sized */}
-        {/* Note: I increased z-index to z-20 so it stays above the waves */}
+        {/* Interactive SoundCloud Player - Hot Sauce Private Session */}
         <div className="absolute bottom-[30px] left-1/2 transform -translate-x-1/2 w-[480px] h-[266px] z-20 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.3)]">
           <iframe
             width="100%"
@@ -117,117 +89,20 @@ export default function DJLanding() {
 
       </section>
 
-{/* =========================================================
-   SESSIONS
-========================================================= */}
-
-import { useEffect, useState } from "react";
-
-export default function SoundcloudFeed() {
-  const [tracks, setTracks] = useState([]);
-  const[active, setActive] = useState(null);
-
-  useEffect(() => {
-    const feed =
-      "https://api.allorigins.win/raw?url=" +
-      encodeURIComponent(
-        "https://feeds.soundcloud.com/users/soundcloud:users:113724148/sounds.rss"
-      );
-
-    fetch(feed)
-      .then((res) => res.text())
-      .then((str) => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(str, "text/xml");
-
-        // Grab the 6 most recent tracks (starting at index 0 so we don't skip the newest!)
-        const items = Array.from(xml.querySelectorAll("item")).slice(0, 6);
-
-        const parsed = items.map((item) => {
-          const itunesImage = item.getElementsByTagName("itunes:image")[0];
-          const artwork = itunesImage ? itunesImage.getAttribute("href") : null;
-
-          return {
-            title: item.querySelector("title")?.textContent,
-            link: item.querySelector("link")?.textContent,
-            artwork: artwork,
-          };
-        });
-
-        setTracks(parsed);
-      })
-      .catch((err) => console.error("Error fetching feed:", err));
-  },[]);
-
-  return (
-    <>
-      <div className="grid md:grid-cols-3 gap-8">
-        {tracks.map((track, i) => (
-          <div
-            key={i}
-            onClick={() => setActive(track)}
-            className="bg-[#171717] rounded-xl overflow-hidden cursor-pointer group transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,211,238,0.2)]"
-          >
-            <div className="relative">
-              {track.artwork ? (
-                <img
-                  src={track.artwork}
-                  alt={track.title}
-                  className="w-full h-48 object-cover"
-                />
-              ) : (
-                <div className="w-full h-48 bg-gradient-to-br from-cyan-500/20 to-purple-500/20"></div>
-              )}
-
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                <div className="w-14 h-14 rounded-full border border-white/80 flex items-center justify-center text-white text-xl backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-                  ▶
-                </div>
-              </div>
-            </div>
-
-            <div className="p-5">
-              <h3 className="text-sm font-medium text-gray-100 line-clamp-2">
-                {track.title}
-              </h3>
-            </div>
-          </div>
-        ))}
-      </div>
-
       {/* =========================================================
-         MIX MODAL PLAYER
+         SESSIONS (RADIO)
       ========================================================= */}
 
-      {activeMix && (
+      <section id="sessions" className="max-w-6xl mx-auto px-6 py-24">
 
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+        <h2 className="text-3xl mb-10">
+          Radio B.J11
+        </h2>
 
-          <div className="bg-[#111] rounded-xl max-w-xl w-full p-6 relative">
+        {/* This securely loads the separate file from your components folder! */}
+        <SoundcloudFeed />
 
-            <button
-              onClick={() => setActiveMix(null)}
-              className="absolute top-4 right-4 text-white/70 hover:text-white"
-            >
-              ✕
-            </button>
-
-            <h3 className="mb-4 text-lg">{activeMix.title}</h3>
-
-            <iframe
-              width="100%"
-              height="166"
-              scrolling="no"
-              frameBorder="no"
-              allow="autoplay"
-              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(activeMix.link)}&color=%239be7d8`}
-            ></iframe>
-
-          </div>
-
-        </div>
-
-      )}
+      </section>
 
       {/* =========================================================
          PHOTO GALLERY
@@ -251,9 +126,10 @@ export default function SoundcloudFeed() {
         id="about"
         className="max-w-5xl mx-auto px-6 py-24 grid md:grid-cols-2 gap-12 items-center"
       >
-
+        {/* FIXED: Uses the imported 'fercho' variable instead of a broken path */}
         <img
-          src="/src/assets/fercho.png"
+          src={fercho}
+          alt="B.J11 DJ"
           className="rounded-xl w-full object-cover"
         />
 
@@ -293,22 +169,4 @@ export default function SoundcloudFeed() {
 
       </section>
 
-      {/* =========================================================
-         FOOTER
-      ========================================================= */}
-
-      <footer className="text-center py-12 text-[#8C8C8C] text-sm">
-
-        <div className="space-x-6 mb-3">
-          <a href="#">SoundCloud</a>
-          <a href="#">Mixcloud</a>
-          <a href="#">Instagram</a>
-        </div>
-
-        <div>© 2026 B.J11</div>
-
-      </footer>
-
-    </div>
-  );
-}
+      {/* ==================================
