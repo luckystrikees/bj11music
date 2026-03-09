@@ -35,7 +35,7 @@ export default function SoundcloudFeed() {
         setTracks(parsed);
       })
       .catch((err) => console.error("Error fetching feed:", err));
-  }, []);
+  },[]);
 
   return (
     <>
@@ -80,3 +80,29 @@ export default function SoundcloudFeed() {
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 transition-opacity">
           <div className="bg-[#111] border border-white/10 rounded-xl max-w-xl w-full p-6 relative shadow-2xl">
             <button
+              onClick={() => setActive(null)}
+              className="absolute -top-4 -right-4 w-10 h-10 bg-black border border-white/20 rounded-full flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 transition z-10"
+            >
+              ✕
+            </button>
+
+            <h3 className="mb-4 text-lg font-semibold pr-6 line-clamp-1">
+              {active.title}
+            </h3>
+
+            <iframe
+              width="100%"
+              height="166"
+              scrolling="no"
+              frameBorder="no"
+              allow="autoplay"
+              src={`https://w.soundcloud.com/player/?url=${encodeURIComponent(
+                active.link
+              )}&color=%239be7d8&auto_play=true`}
+            ></iframe>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
