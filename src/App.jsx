@@ -54,37 +54,40 @@ export default function DJLanding() {
         </div>
       </header>
 
-      {/* =========================================================
+{/* =========================================================
          HERO
       ========================================================= */}
 
       <section className="relative h-screen overflow-hidden">
-        {/* Header Banner Image as Background */}
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover object-[70%_center]" />
         </div>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)] z-10"></div>
-
-        {/* Wave Background */}
+        
         <WaveBackground />
 
-        {/* Ambient / Chill House text */}
-        <p className="absolute top-28 left-6 md:left-24 text-[#8C8C8C] z-10 text-lg">
-          Ambient / Chill House
-        </p>
+        {/* This container locks your content to the same 6xl width as your Nav */}
+        <div className="relative max-w-6xl mx-auto h-full flex items-end justify-end px-6 pb-[30px] z-20">
+          
+          {/* Ambient Text - Positioned separately */}
+          <p className="absolute top-28 left-0 text-[#8C8C8C] text-lg">
+            Ambient / Chill House
+          </p>
 
-        {/* Interactive SoundCloud Player - Hot Sauce Private Session */}
-        <div className="absolute bottom-[30px] right-[10%] w-[480px] h-[266px] z-20 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.3)]">
-          <iframe
-            width="100%"
-            height="100%"
-            scrolling="no"
-            frameBorder="no"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
-          ></iframe>
+          {/* This player is now inside the max-w-6xl container, so it will stick to the right edge of your content, not the edge of the screen */}
+          <div className="w-[480px] h-[266px] rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.3)]">
+            <iframe
+              width="100%"
+              height="100%"
+              scrolling="no"
+              frameBorder="no"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
+            ></iframe>
+          </div>
         </div>
 
       </section>
