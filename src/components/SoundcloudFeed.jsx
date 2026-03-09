@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export default function SoundcloudFeed() {
   const [tracks, setTracks] = useState([]);
-  const [active, setActive] = useState(null);
+  const[active, setActive] = useState(null);
 
   useEffect(() => {
     const feed =
@@ -17,11 +17,10 @@ export default function SoundcloudFeed() {
         const parser = new DOMParser();
         const xml = parser.parseFromString(str, "text/xml");
 
-        // Get items (skipping the first one if it's channel info)
-        const items = Array.from(xml.querySelectorAll("item")).slice(1, 7);
+        // Grab the 6 most recent tracks (starting at index 0 so we don't skip the newest!)
+        const items = Array.from(xml.querySelectorAll("item")).slice(0, 6);
 
         const parsed = items.map((item) => {
-          // Extract the iTunes image artwork from the RSS feed
           const itunesImage = item.getElementsByTagName("itunes:image")[0];
           const artwork = itunesImage ? itunesImage.getAttribute("href") : null;
 
@@ -47,7 +46,6 @@ export default function SoundcloudFeed() {
             className="bg-[#171717] rounded-xl overflow-hidden cursor-pointer group transition hover:scale-[1.02] hover:shadow-[0_0_25px_rgba(34,211,238,0.2)]"
           >
             <div className="relative">
-              {/* Show actual track artwork if available, otherwise fallback to gradient */}
               {track.artwork ? (
                 <img
                   src={track.artwork}
@@ -58,7 +56,6 @@ export default function SoundcloudFeed() {
                 <div className="w-full h-48 bg-gradient-to-br from-cyan-500/20 to-purple-500/20"></div>
               )}
 
-              {/* Play Button Overlay */}
               <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
                 <div className="w-14 h-14 rounded-full border border-white/80 flex items-center justify-center text-white text-xl backdrop-blur-sm shadow-[0_0_15px_rgba(34,211,238,0.5)]">
                   ▶
