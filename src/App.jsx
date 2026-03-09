@@ -76,7 +76,7 @@ export default function DJLanding() {
         </p>
 
         {/* Interactive SoundCloud Player - Hot Sauce Private Session */}
-        <div className="absolute bottom-[30px] left-1/2 transform -translate-x-1/2 w-[480px] h-[266px] z-20 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.3)]">
+        <div className="absolute bottom-[30px] right-[10%] w-[480px] h-[266px] z-20 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.3)]">
           <iframe
             width="100%"
             height="100%"
