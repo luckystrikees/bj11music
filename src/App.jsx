@@ -88,7 +88,8 @@ export default function DJLanding() {
       <section className="relative h-screen overflow-hidden">
         {/* Header Banner Image as Background */}
         <div className="absolute inset-0 z-0">
-          <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover" />
+          {/* Added object-position-right to keep B.J11 in view */}
+          <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover object-right" />
         </div>
 
         {/* Gradient Overlay */}
