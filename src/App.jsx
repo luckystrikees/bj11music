@@ -6,7 +6,7 @@
 import { useState } from "react";
 import SoundcloudFeed from "./components/SoundcloudFeed";
 import header from "./assets/header.png"; // Changed from logo to header
-import WaveBackground from "./components/WaveBackground"; // This will be removed or commented out
+// import WaveBackground from "./components/WaveBackground"; // No longer needed
 import PhotoLightbox from "./components/PhotoLightbox";
 
 /**********************************************************************
@@ -85,7 +85,7 @@ export default function DJLanding() {
          HERO
       ========================================================= */}
 
-      <section className="relative h-screen flex flex-col justify-end text-center overflow-hidden">
+      <section className="relative h-screen overflow-hidden">
         {/* Header Banner Image as Background */}
         <div className="absolute inset-0 z-0">
           <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover" />
@@ -94,13 +94,13 @@ export default function DJLanding() {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)] z-10"></div>
 
-        {/* Ambient / Chill House text - repositioned */}
+        {/* Ambient / Chill House text - repositioned to left */}
         <p className="absolute top-28 left-6 md:left-24 text-[#8C8C8C] z-10 text-lg">
           Ambient / Chill House
         </p>
 
-        {/* Interactive SoundCloud Player - Absolutely positioned within the banner area */}
-        <div className="absolute bottom-1/4 right-1/4 transform translate-x-1/2 translate-y-1/2 w-[300px] h-[166px] z-10 rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+        {/* Interactive SoundCloud Player - Precisely positioned and sized */}
+        <div className="absolute bottom-[30px] left-1/2 transform -translate-x-1/2 w-[480px] h-[266px] z-10 rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
           <iframe
             width="100%"
             height="100%"
