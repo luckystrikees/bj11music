@@ -169,4 +169,22 @@ export default function DJLanding() {
 
       </section>
 
-      {/* ==================================
+      {/* =========================================================
+         FOOTER
+      ========================================================= */}
+
+      <footer className="text-center py-12 text-[#8C8C8C] text-sm">
+
+        <div className="space-x-6 mb-3">
+          <a href="#">SoundCloud</a>
+          <a href="#">Mixcloud</a>
+          <a href="#">Instagram</a>
+        </div>
+
+        <div>© 2026 B.J11</div>
+
+      </footer>
+
+    </div>
+  );
+}
