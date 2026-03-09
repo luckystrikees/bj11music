@@ -6,7 +6,7 @@
 import { useState } from "react";
 import SoundcloudFeed from "./components/SoundcloudFeed";
 import header from "./assets/header.png"; // Changed from logo to header
-// import WaveBackground from "./components/WaveBackground"; // No longer needed
+import WaveBackground from "./components/WaveBackground";
 import PhotoLightbox from "./components/PhotoLightbox";
 
 /**********************************************************************
@@ -88,12 +88,14 @@ export default function DJLanding() {
       <section className="relative h-screen overflow-hidden">
         {/* Header Banner Image as Background */}
         <div className="absolute inset-0 z-0">
-          {/* Changed object-position to a percentage for finer control */}
           <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover object-[70%_center]" />
         </div>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)] z-10"></div>
+
+        {/* --- ADD THE WAVE BACKGROUND HERE --- */}
+        <WaveBackground />
 
         {/* Ambient / Chill House text - repositioned to left */}
         <p className="absolute top-28 left-6 md:left-24 text-[#8C8C8C] z-10 text-lg">
@@ -101,7 +103,8 @@ export default function DJLanding() {
         </p>
 
         {/* Interactive SoundCloud Player - Precisely positioned and sized */}
-        <div className="absolute bottom-[30px] left-1/2 transform -translate-x-1/2 w-[480px] h-[266px] z-10 rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+        {/* Note: I increased z-index to z-20 so it stays above the waves */}
+        <div className="absolute bottom-[30px] left-1/2 transform -translate-x-1/2 w-[480px] h-[266px] z-20 rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.3)]">
           <iframe
             width="100%"
             height="100%"
