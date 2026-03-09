@@ -5,37 +5,30 @@ export default function WaveBackground() {
   const containerRef = useRef(null);
 
   useEffect(() => {
+    // The container must have a defined height/width before initialization
+    if (!containerRef.current) return;
+
     const wavesurfer = WaveSurfer.create({
       container: containerRef.current,
-      waveColor: "rgba(34, 211, 238, 0.15)", // Tweaked to match your cyan theme better
-      progressColor: "rgba(34, 211, 238, 0.4)",
-      barWidth: 3,
-      barGap: 3,
-      height: 160, // Made it slightly taller
+      waveColor: "rgba(155,231,216,0.2)",
+      progressColor: "rgba(155,231,216,0.5)",
+      barWidth: 2,
+      barGap: 2,
+      height: 120,
       interact: false,
       cursorWidth: 0,
+      responsive: true, // Crucial for resizing
     });
 
-    // Note: In a production environment, you might want to use a shorter, 
-    // highly compressed audio file here to save user bandwidth!
-    wavesurfer.load(
-      "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    );
-
-    // Auto-play the visualizer (muted) so it's always moving
-    wavesurfer.on('ready', () => {
-      wavesurfer.setVolume(0); 
-      wavesurfer.play();
-    });
+    wavesurfer.load("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
 
     return () => wavesurfer.destroy();
-  },[]);
+  }, []);
 
   return (
     <div
       ref={containerRef}
-      // Added z-10 and pointer-events-none so it doesn't block clicks on the player
-      className="absolute bottom-0 left-0 right-0 opacity-60 z-10 pointer-events-none mix-blend-screen"
+      className="absolute bottom-0 left-0 right-0 h-32 opacity-40" // Added h-32
     />
   );
 }
