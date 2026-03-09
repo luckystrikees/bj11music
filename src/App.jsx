@@ -6,7 +6,7 @@
 import { useState } from "react";
 import SoundcloudFeed from "./components/SoundcloudFeed";
 import header from "./assets/header.png"; // Changed from logo to header
-import WaveBackground from "./components/WaveBackground";
+import WaveBackground from "./components/WaveBackground"; // This will be removed or commented out
 import PhotoLightbox from "./components/PhotoLightbox";
 
 /**********************************************************************
@@ -85,47 +85,30 @@ export default function DJLanding() {
          HERO
       ========================================================= */}
 
-      <section className="h-screen flex items-center justify-center text-center relative overflow-hidden">
-
-        {/* Replaced WaveBackground with the new header image */}
+      <section className="relative h-screen flex flex-col justify-end text-center overflow-hidden">
+        {/* Header Banner Image as Background */}
         <div className="absolute inset-0 z-0">
           <img src={header} alt="B.J11 DJ Header" className="w-full h-full object-cover" />
         </div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)]"></div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.18),transparent_60%)] z-10"></div>
 
-        <div className="relative z-10 max-w-xl mx-auto px-6">
+        {/* Ambient / Chill House text - repositioned */}
+        <p className="absolute top-28 left-6 md:left-24 text-[#8C8C8C] z-10 text-lg">
+          Ambient / Chill House
+        </p>
 
-          {/* This section for the old logo is now removed or commented out */}
-          {/*
-          <div className="relative flex justify-center mb-10">
-            <div className="absolute w-[420px] h-[420px] bg-cyan-400/20 blur-[120px] rounded-full"></div>
-            <img
-              src={logo}
-              alt="B.J11 DJ"
-              className="relative w-72 md:w-96 rounded-2xl shadow-[0_30px_80px_rgba(0,0,0,0.8)] drop-shadow-[0_0_40px_rgba(34,211,238,0.35)] transition duration-700 hover:scale-[1.02]"
-            />
-          </div>
-          */}
-
-          <p className="text-[#8C8C8C] mb-6">
-            Ambient / Chill House
-          </p>
-
-          {/* hero player */}
-          <div className="rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
-
-            <iframe
-              width="100%"
-              height="300"
-              scrolling="no"
-              frameBorder="no"
-              allow="autoplay"
-              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
-            ></iframe>
-
-          </div>
-
+        {/* Interactive SoundCloud Player - Absolutely positioned within the banner area */}
+        <div className="absolute bottom-1/4 right-1/4 transform translate-x-1/2 translate-y-1/2 w-[300px] h-[166px] z-10 rounded-xl overflow-hidden shadow-[0_0_25px_rgba(34,211,238,0.25)]">
+          <iframe
+            width="100%"
+            height="100%"
+            scrolling="no"
+            frameBorder="no"
+            allow="autoplay"
+            src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/fernando-castillo-jimenez/manu-rosas-b2b-bj11-hot-sauce-private-session&color=%239be7d8&auto_play=false&show_artwork=true&visual=true"
+          ></iframe>
         </div>
 
       </section>
